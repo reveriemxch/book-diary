@@ -1,0 +1,57 @@
+/* 1. The Background: Makes the whole screen look nice */
+body {
+    background-color: #e0d7c6; /* A soft, paper-like tan */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Georgia', serif; /* A classic "book" font */
+}
+
+/* 2. The Book Shell: The main container */
+.book-shell {
+    background-color: #fffef0; /* Slightly off-white for pages */
+    width: 800px;
+    height: 500px;
+    display: flex; /* This puts the pages side-by-side! */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Adds a shadow for depth */
+    border: 5px solid #5a3e2b; /* A wooden or leather-like border */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 3. The Pages: Styling the left and right sides */
+.page {
+    flex: 1; /* Makes each page take up exactly half the space */
+    padding: 30px;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 4. The Inputs: Styling the "Writing" area */
+textarea {
+    flex-grow: 1; /* Makes the box fill the page height */
+    border: none;
+    background: transparent;
+    line-height: 1.6;
+    font-size: 16px;
+    resize: none; /* Prevents the user from dragging the corner */
+    outline: none; /* Removes the blue border when typing */
+}
+
+/* 5. The Buttons: Making them look clickable */
+button {
+    background-color: #5a3e2b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #7a5a41; /* Changes color when you hover over it */
+}
