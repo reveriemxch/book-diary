@@ -1,36 +1,29 @@
-// 1. Find the elements in our HTML using their IDs
-const entryInput = document.getElementById('entry-input');
-const saveBtn = document.getElementById('save-btn');
-const entryDisplay = document.getElementById('entry-display');
+const leaves = document.querySelectorAll('.leaf');
 
-// 2. This function runs when you click "Save"
-saveBtn.addEventListener('click', function() {
-    const textValue = entryInput.value;
+leaves.forEach((leaf, index) => {
+    leaf.addEventListener('click', (e) => {
+        // Don't flip if we are clicking inside the textarea
+        if (e.target.tagName === 'TEXTAREA') return;
 
-    if (textValue === "") {
-        alert("Please write something first!");
-        return;
-    }
+        leaf.classList.toggle('flipped');
 
-    // Save it to the browser's "Local Storage" (Memory)
-    localStorage.setItem('savedDiaryEntry', textValue);
-
-    // Update the display on the right page immediately
-    displayEntry(textValue);
-    
-    // Clear the input box so you can write something new
-    entryInput.value = "";
+        // Logic to make sure the pages layer correctly when flipped
+        if (leaf.classList.contains('flipped')) {
+            // Wait for the animation to finish then change z-index
+            setTimeout(() => {
+                leaf.style.zIndex = index;
+            }, 500);
+        } else {
+            // When flipping back, restore higher z-index immediately
+            leaf.style.zIndex = leaves.length - index;
+        }
+    });
 });
 
-// 3. This function puts the text onto the right-side page
-function displayEntry(text) {
-    entryDisplay.innerHTML = `<p>${text}</p>`;
+// Simple reaction function
+function addReaction(emoji) {
+    const readerView = document.getElementById('reader-view');
+    const span = document.createElement('span');
+    span.innerText = emoji;
+    readerView.appendChild(span);
 }
-
-// 4. When the page first loads, check if there is a saved entry
-window.onload = function() {
-    const data = localStorage.getItem('savedDiaryEntry');
-    if (data) {
-        displayEntry(data);
-    }
-};
