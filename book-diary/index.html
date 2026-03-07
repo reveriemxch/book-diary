@@ -2,36 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Letters to my baby</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Diary</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="book-shell">
-        
-        <h1>Letters to my baby 
-        </h1>
-
-        <div class="page" id="write-page">
-            <h3>Write a New Entry</h3>
-            <textarea id="entry-input" placeholder="What's on your mind?"></textarea>
-            <br>
-            <button id="save-btn">Save to Diary</button>
-        </div>
-
-        <hr> <div class="page" id="read-page">
-            <h3>Latest Entry</h3>
-            <div id="entry-display">
-                <em>No entries yet...</em>
+    <div class="book-container">
+        <div class="book">
+            <div class="leaf" id="leaf1" style="z-index: 3;">
+                <div class="page front cover">
+                    <h1>My Digital Diary</h1>
+                    <p>Click to open</p>
+                </div>
+                <div class="page back">
+                    <h2>Page 1</h2>
+                    <textarea id="text1" placeholder="Write your first entry..."></textarea>
+                </div>
             </div>
-            
-            <div class="reactions">
-                <button>❤️</button>
-                <button>🔥</button>
-                <button>✏️ Add Note</button>
+
+            <div class="leaf" id="leaf2" style="z-index: 2;">
+                <div class="page front">
+                    <h2>Page 2</h2>
+                    <textarea id="text2" placeholder="Continue writing..."></textarea>
+                </div>
+                <div class="page back">
+                    <h2>Page 3</h2>
+                    <div id="reader-view">
+                        <p>This is where others can read or add things.</p>
+                    </div>
+                    <div class="reactions">
+                        <button onclick="addReaction('❤️')">❤️</button>
+                        <button onclick="addReaction('⭐')">⭐</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="leaf" id="leaf3" style="z-index: 1;">
+                <div class="page front">
+                    <h2>The End</h2>
+                    <p>Thanks for reading!</p>
+                </div>
+                <div class="page back cover"></div>
             </div>
         </div>
-
     </div>
 
     <script src="script.js"></script>
