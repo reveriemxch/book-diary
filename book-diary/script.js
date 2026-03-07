@@ -1,29 +1,72 @@
-const leaves = document.querySelectorAll('.leaf');
+body {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Georgia', serif;
+}
 
-leaves.forEach((leaf, index) => {
-    leaf.addEventListener('click', (e) => {
-        // Don't flip if we are clicking inside the textarea
-        if (e.target.tagName === 'TEXTAREA') return;
+.book-container {
+    perspective: 1500px;
+}
 
-        leaf.classList.toggle('flipped');
+.book {
+    position: relative;
+    width: 350px;
+    height: 450px;
+    transform-style: preserve-3d;
+}
 
-        // Logic to make sure the pages layer correctly when flipped
-        if (leaf.classList.contains('flipped')) {
-            // Wait for the animation to finish then change z-index
-            setTimeout(() => {
-                leaf.style.zIndex = index;
-            }, 500);
-        } else {
-            // When flipping back, restore higher z-index immediately
-            leaf.style.zIndex = leaves.length - index;
-        }
-    });
-});
+.leaf {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
 
-// Simple reaction function
-function addReaction(emoji) {
-    const readerView = document.getElementById('reader-view');
-    const span = document.createElement('span');
-    span.innerText = emoji;
-    readerView.appendChild(span);
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: #fffef0;
+    border: 1px solid #d4c5a9;
+    box-shadow: inset 5px 0 10px rgba(0,0,0,0.1);
+}
+
+.page.back {
+    transform: rotateY(180deg);
+}
+
+.cover {
+    background-color: #5a3e2b;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* When a leaf is flipped */
+.leaf.flipped {
+    transform: rotateY(-180deg);
+}
+
+textarea {
+    width: 100%;
+    height: 80%;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
 }
